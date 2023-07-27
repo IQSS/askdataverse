@@ -29,6 +29,7 @@ SOFTWARE.
 # shiny
 # pandas
 
+# This code, my first python code, was created in a night. Be merciful.
 
 # This script requires two arguments: `fileId` and `siteUrl`. 
 # The parameter `dataset_pid` is collected but not yet used
@@ -73,8 +74,10 @@ os.chdir(mypath)
 
 OPENAI_API_KEY = 'xxxxxxxxx' # your OpenAI key
 
+# We use OpenAI `text-davinci-003` but it can be changed with other models supported by LangChain
 myllm = llm=OpenAI(temperature=0,openai_api_key=OPENAI_API_KEY, model_name = "text-davinci-003")
 
+# these variable must remain global
 apiStr = '/api/access/datafile/'
 fileid = ""
 dataset_pid = ""
@@ -105,6 +108,8 @@ def app_ui(request):
     )
     return _ui
 
+# some variables need to leave within server() so they remain local to the user session
+# otherwise two users may load different data that overlaps in the shiny session
 
 def server(input, output, session):
     HaveData = reactive.Value(None)
