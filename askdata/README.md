@@ -27,20 +27,21 @@ We plan to expand the functionalities of this tool.
 * add basic statical analysis functionalities
 * add basic plotting functionalities
 
-## To deploy on [shinyapps.io](https://www.shinyapps.io)
-At present ShinyApps.io supports only python 3.10 so make sure your local environment is based on this release.
-
-Hint: you can create an environment after installing [Anaconda](https://docs.anaconda.com/free/anaconda/install/index.html) with 
+## Deploy to [shinyapps.io](https://www.shinyapps.io)
+At present ShinyApps.io supports only python 3.10 so make sure your local environment is based on this release. 
+*Hint:* you can create an environment after installing [Anaconda](https://docs.anaconda.com/free/anaconda/install/index.html) with 
 
 `conda create -n shinyapp python=3.10`
 
 `conda activate shinyapp`
-* adjust the variables `inputUrl` and `OPENAI_API_KEY` in the [app.py](app.py) file to your needs
-* create a free account at [shinyapps.io](https://www.shinyapps.io)
-* install the [application token](https://docs.posit.co/shinyapps.io/getting-started.html) 
+* these instruction assume the deployment is to the `askdataverse` ShinyApps.io domain. You should change it with yours.
+* adjust the variable `OPENAI_API_KEY` in the [app.py](app.py) file to your needs
+* create a free account at [shinyapps.io](https://www.shinyapps.io). With this you will get your domain to replace `askdataverse`.
+* install [`rsconnect`](https://pypi.org/project/rsconnect-python/)
+* install the ShinyApps.io [application token](https://docs.posit.co/shinyapps.io/getting-started.html) 
 * run the ["install certificates.command"](https://www.geeksforgeeks.org/how-to-install-and-use-ssl-certificate-in-python/) for your python version
-* run `pip install -r requirements.txt`
-* in your shell type: `export CONNECT_REQUEST_TIMEOUT=36000` and the return key. You can use a larger number if `rsconnect` fails due to a timeout error. This is a `shinyapps.io` issue
+* in you shell, type: `pip install -r requirements.txt`
+* in your shell type: `export CONNECT_REQUEST_TIMEOUT=36000`. You can use a larger number if `rsconnect` fails due to a timeout error. This is a `shinyapps.io` issue
 * deploy with: `rsconnect deploy shiny ./ --name askdataverse --title askdata --exclude *.db`
 
 
