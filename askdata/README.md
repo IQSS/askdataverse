@@ -44,6 +44,9 @@ Hint: you can create an environment after installing [Anaconda](https://docs.ana
 * deploy with: `rsconnect deploy shiny ./ --name askdataverse --title askdata --exclude *.db`
 
 
+Note: you have to replace `askdataverse` to your ShinyApps.io domain.
+
+
 
 ## Usage 
 This script requires two arguments: `fileId` and `siteUrl`. 
