@@ -91,8 +91,8 @@ def app_ui(request):
     global dataurl
     global apiStr
 
-    fileid = request.query_params.get('fileid')
-    dataset_pid = request.query_params.get('dataset_pid')
+    fileid = request.query_params.get('fileId')
+    dataset_pid = request.query_params.get('datasetPid')
     siteUrl = request.query_params.get('siteUrl')
     if fileid is None:
         fileid = ''
