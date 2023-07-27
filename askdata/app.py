@@ -29,6 +29,18 @@ SOFTWARE.
 # shiny
 # pandas
 
+
+# This script requires two arguments: `fileId` and `siteUrl`. 
+# The parameter `dataset_pid` is collected but not yet used
+# for Harvard Dataverse siteUrl always equals to https://dataverse.harvard.edu
+# fileId is the internal identifier in the Dataverse database
+# example of use:
+# https://askdataverse.shinyapps.io/askdata/?fileid=4862482siteUrl=https://dataverse.harvard.edu
+# or, if run locally
+# http://localhost:64504/?fileid=4862482&siteUrl=https://dataverse.harvard.edu
+# replace 64504 with your port
+
+
 from shiny import  App, reactive, render, ui
 import asyncio
 import re
@@ -67,7 +79,7 @@ apiStr = '/api/access/datafile/'
 fileid = ""
 dataset_pid = ""
 dataurl = ""
-siteUrl = "https://dataverse.harvard.edu"  # adjust to your dataverse installation
+siteUrl = ""
 
 
 def app_ui(request):
@@ -89,7 +101,6 @@ def app_ui(request):
         ui.input_text_area("query", "Tell me what you want to know", placeholder="What is this data about?"),
         ui.input_action_button("think", "Answer please", class_="btn-primary"),
         ui.output_text("answer"),
-        ui.output_text("fileinfo"),
         ui.output_data_frame("grid")
     )
     return _ui
@@ -126,14 +137,6 @@ def server(input, output, session):
     async def grid():
         data = await load_tabular_data()
         return render.DataGrid(data,height=350,width="fit-content")
-
-    @output
-    @render.text
-    async def fileinfo():
-        global fileid
-        global dataset_pid
-        global dataurl
-        return f"fileid: {fileid}\ndataset_pid: {dataset_pid}\ndataurl: {dataurl}"        
 
     @output
     @render.text

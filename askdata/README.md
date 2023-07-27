@@ -41,4 +41,19 @@ Hint: you can create an environment after installing [Anaconda](https://docs.ana
 * deploy with `rsconnect deploy shiny ./ --name askdataverse --title askdata --exclude *.db`
 
 
+
+## Usage 
+This script requires two arguments: `fileId` and `siteUrl`. 
+The parameter `dataset_pid` is collected but not yet used.
+
+* for Harvard Dataverse `siteUrl` always equals to [https://dataverse.harvard.edu](https://dataverse.harvard.edu)
+* `fileId` is the internal identifier in the Dataverse database
+
+### Examples:
+* [https://askdataverse.shinyapps.io/askdata/?fileid=4862482&siteUrl=https://dataverse.harvard.edu](https://askdataverse.shinyapps.io/askdata/?fileid=4862482&siteUrl=https://dataverse.harvard.edu)
+or, if run locally (replace `64504` with your port):
+* [http://localhost:64504/?fileid=4862482&siteUrl=https://dataverse.harvard.edu](http://localhost:64504/?fileid=4862482&siteUrl=https://dataverse.harvard.edu)
+
+
+
 Enjoy!
