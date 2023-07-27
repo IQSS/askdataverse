@@ -53,12 +53,28 @@ The parameter `dataset_pid` is collected but not yet used.
 * `fileId` is the internal identifier in the Dataverse database
 
 ### Examples:
-* [https://askdataverse.shinyapps.io/askdata/?fileid=4862482&siteUrl=https://dataverse.harvard.edu](https://askdataverse.shinyapps.io/askdata/?fileid=4862482&siteUrl=https://dataverse.harvard.edu)
+* Example 1: [https://askdataverse.shinyapps.io/askdata/?fileid=4862482&siteUrl=https://dataverse.harvard.edu](https://askdataverse.shinyapps.io/askdata/?fileid=4862482&siteUrl=https://dataverse.harvard.edu)
 
 
 or, if run locally (replace `64504` with your port):
 * [http://localhost:64504/?fileid=4862482&siteUrl=https://dataverse.harvard.edu](http://localhost:64504/?fileid=4862482&siteUrl=https://dataverse.harvard.edu)
 
+* Example 2: [https://askdataverse.shinyapps.io/askdata/?fileid=4458512&siteUrl=https://dataverse.harvard.edu](https://askdataverse.shinyapps.io/askdata/?fileid=4458512&siteUrl=https://dataverse.harvard.edu)
+  
+### Questions:
+* what is this data about? (this is the default starting question)
+* what's the most interesting thing about this data?
+* surprise me with this data (this is a risky question, but helps to understand the limits of this tool)
 
+
+and in particular, if you use the data from Example 1 in the above:
+* do males smoke more than women?
+* what is the average age of smokers by city?
+* where people smoke the most?
+
+
+and if you use the data from Example 2 in the above:
+* how many people died by covid?
+* 
 
 Enjoy!
