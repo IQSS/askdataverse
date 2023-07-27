@@ -12,7 +12,7 @@
   "toolParameters": {
     "queryParameters": [
       {
-        "fileid": "{fileId}"
+        "fileId": "{fileId}"
       },
       {
         "datasetPid": "{datasetPid}"
