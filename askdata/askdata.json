@@ -1,7 +1,7 @@
 {
   "displayName": "Ask the Data",
   "description": "A tool that allows you to ask questions about Dataverse tabular data.",
-  "toolName": "askDV",
+  "toolName": "AskData",
   "scope": "file",
   "types": [
     "query"
