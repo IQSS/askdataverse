@@ -1,5 +1,5 @@
 {
-  "displayName": "Ask Dataverse",
+  "displayName": "Ask the Data",
   "description": "A tool that allows you to ask questions about Dataverse tables.",
   "toolName": "askDV",
   "scope": "file",
