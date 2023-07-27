@@ -1,7 +1,8 @@
 # Askdata
 
-Experimental code to query tabular data with natural language queries.
-The code takes the input natural language query, transforms it into a SQL query, executes the query on the database and then tries to translate the resul back into natural language. 
+Experimental code to query tabular data with natural language queries. The LLM looks only at the content of the tabular data and not at the dataset description or any metadata.
+
+The code takes the input natural language query, transforms it into a SQL query, executes the query on the database and then tries to translate the resul back into natural language. Data are downladed locally, so if too large, the tool may take a little moment to load.
 
 The code is meant not have memory, so each query is independent. This is a feature!
 
@@ -18,9 +19,11 @@ We plan to expand the functionalities of this tool.
 
 ## Known issues:
 * can generate hallucinations
-* can be stuck into a loop that lead to no aswer or error
+* can remain stuck into a loop that lead to no aswer or an error
 * there is no control over long queries, so the code may return an error
 * the generated SQL query can be too large for the context window of the LLM
+* if the data is too large the tool may fail to launch (out of memory)
+* the notifications appear at the bottom of the web page
 
 ## Plans:
 * fix some of the above issues
@@ -56,14 +59,22 @@ The parameter `dataset_pid` is collected but not yet used.
 * for Harvard Dataverse `siteUrl` always equals to [https://dataverse.harvard.edu](https://dataverse.harvard.edu)
 * `fileId` is the internal identifier in the Dataverse database
 
-### Examples:
-* Example 1: [https://askdataverse.shinyapps.io/askdata/?fileid=4862482&siteUrl=https://dataverse.harvard.edu](https://askdataverse.shinyapps.io/askdata/?fileid=4862482&siteUrl=https://dataverse.harvard.edu)
+### Examples
+Although some interesting queries may fail for a given data, in general it works pretty well.
+The more you think *sql-ish*, the higher the success to get an answer.
+Generic queries are calculated on the first few rows of the database, so sometimes you need to force the queries like:
+
+* Example 1: data about smoking habits [https://askdataverse.shinyapps.io/askdata/?fileid=4862482&siteUrl=https://dataverse.harvard.edu](https://askdataverse.shinyapps.io/askdata/?fileid=4862482&siteUrl=https://dataverse.harvard.edu)
 
 
 or, if run locally (replace `64504` with your port):
 * [http://localhost:64504/?fileid=4862482&siteUrl=https://dataverse.harvard.edu](http://localhost:64504/?fileid=4862482&siteUrl=https://dataverse.harvard.edu)
 
-* Example 2: [https://askdataverse.shinyapps.io/askdata/?fileid=4458512&siteUrl=https://dataverse.harvard.edu](https://askdataverse.shinyapps.io/askdata/?fileid=4458512&siteUrl=https://dataverse.harvard.edu)
+* Example 2: data about COVID-19 and hospitalization [https://askdataverse.shinyapps.io/askdata/?fileid=4458512&siteUrl=https://dataverse.harvard.edu](https://askdataverse.shinyapps.io/askdata/?fileid=4458512&siteUrl=https://dataverse.harvard.edu)
+
+* Example 3: data about metadata [https://askdataverse.shinyapps.io/askdata/?fileid=6570377&siteUrl=https://dataverse.harvard.edu](https://askdataverse.shinyapps.io/askdata/?fileid=6570377&siteUrl=https://dataverse.harvard.edu)
+
+
   
 ### Questions:
 * *what is this data about?* (this is the default starting question)
@@ -83,6 +94,14 @@ and if you use the data from [Example 2](https://askdataverse.shinyapps.io/askda
 * *what is the average number of days between admission date and death?*
 * *calculate the severity by gender*
 
+
+and if you use the data from [Example 3](https://askdataverse.shinyapps.io/askdata/?fileid=6570377&siteUrl=https://dataverse.harvard.edu) in the above:
+* *what is this data about?* may fail (answering `This data is about astrophysics`) as the system looks at the first rows without further indication. But forcing it to go deeper may work. Try this (eventually twice):
+* *Look at the first 100 rows and tell me what is this data about*
+* *calculate the abundance of different disciplines*
+
 etc, the limit is your creativity... and the LLM ability to answer!
+
+
 
 Enjoy
