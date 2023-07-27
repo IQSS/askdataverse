@@ -40,7 +40,7 @@ At present ShinyApps.io supports only python 3.10 so make sure your local enviro
 * install [`rsconnect`](https://pypi.org/project/rsconnect-python/)
 * install the ShinyApps.io [application token](https://docs.posit.co/shinyapps.io/getting-started.html) 
 * run the ["install certificates.command"](https://www.geeksforgeeks.org/how-to-install-and-use-ssl-certificate-in-python/) for your python version
-* in your shell, type: `pip install -r requirements.txt`
+* in your shell type: `pip install -r requirements.txt`
 * in your shell type: `export CONNECT_REQUEST_TIMEOUT=36000`. You can use a larger number if `rsconnect` fails due to a timeout error. This is a `shinyapps.io` issue
 * deploy with: `rsconnect deploy shiny ./ --name askdataverse --title askdata --exclude *.db`
 
