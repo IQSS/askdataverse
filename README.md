@@ -6,7 +6,7 @@ Here, you'll find a collection of tools and proofs of concept built on top of LL
 Each tool has its own directory and README file. You can start with [AskData](askdata).
 
 Code in this repository is totally experimental. We do not guarantee any long term maintenance. We may decide to change this code in all possible ways according to the Dataverse [roadmap](https://www.iq.harvard.edu/roadmap-dataverse-project) and 
-[IQSS](https://w](https://www.iq.harvard.edu) needs.
+[IQSS](https://www.iq.harvard.edu) needs.
 
 You are free to re-utilize this code any way you like following the license terms.
 
