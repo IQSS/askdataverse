@@ -5,7 +5,7 @@ The code takes the input natural language query, transforms it into a SQL query,
 
 The code is meant not have memory, so each query is independent. This is a feature!
 
-It exploits [LangChain](https://www.langchain.com) agents for the scope and OpenAI.
+It exploits [LangChain](https://www.langchain.com) agents for the scope and [OpenAI](https://openai.com).
 
 Requires an [OpenAI](https://openai.com) `key` to run (see code).
 
