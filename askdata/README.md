@@ -1,4 +1,4 @@
-# askdata
+# Askdata
 
 Experimental code to query tabular data with natural language queries.
 The code takes the input natural language query, transforms it into a SQL query, executes the query on the database and then tries to translate the resul back into natural language. 
