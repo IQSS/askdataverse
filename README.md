@@ -1,5 +1,5 @@
 # AskDataverse
-Experimental code leveraging LLM applications within Dataverse
+Experimental code leveraging LLM applications within [Dataverse](http://dataverse.org)
 
 Here, you'll find a collection of tools and proofs of concept built on top of LLM applications, all tailored to enhance user experience with Dataverse. Join us as we explore the possibilities and potential of LLM within Dataverse and discover new ways to improve your data management workflow.
 
