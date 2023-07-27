@@ -2,9 +2,9 @@
 
 Experimental code to query tabular data with natural language queries. The LLM looks only at the content of the tabular data and not at the dataset description or any metadata.
 
-The code takes the input natural language query, transforms it into a SQL query, executes the query on the database and then tries to translate the resul back into natural language. Data are downladed locally, so if too large, the tool may take a little moment to load.
+The code takes a natural language query as input, transforms it into a SQL query, executes the query on the database and then tries to translate the result back into natural language. Data are downloaded locally, so if too large, the tool may take a moment to load.
 
-The code is meant not have memory, so each query is independent. This is a feature!
+The code is meant not have a memory, so each query is independent. This is a feature!
 
 It exploits [LangChain](https://www.langchain.com) agents for the scope and [OpenAI](https://openai.com).
 
@@ -19,7 +19,7 @@ We plan to expand the functionalities of this tool.
 
 ## Known issues
 * can generate hallucinations
-* can remain stuck into a loop that lead to no aswer or an error
+* can remain stuck into a loop that lead to no answer or an error
 * there is no control over long queries, so the code may return an error
 * the generated SQL query can be too large for the context window of the LLM
 * if the data is too large the tool may fail to launch (out of memory)
@@ -39,7 +39,7 @@ At present ShinyApps.io supports only python 3.10 so make sure your local enviro
 `conda create -n shinyapp python=3.10`
 
 `conda activate shinyapp`
-* these instruction assume the deployment is to the `askdataverse` ShinyApps.io domain. You should change it with yours.
+* these instruction assume the deployment is to the `askdataverse` ShinyApps.io domain. You should change it to yours.
 * adjust the variable `OPENAI_API_KEY` in the [app.py](app.py) file to your needs
 * create a free account at [shinyapps.io](https://www.shinyapps.io). With this you will get your domain to replace `askdataverse`.
 * install [`rsconnect`](https://pypi.org/project/rsconnect-python/)
@@ -92,7 +92,7 @@ and in particular, if you use the data from [Example 1](https://askdataverse.shi
 
 and if you use the data from [Example 2](https://askdataverse.shinyapps.io/askdata/?fileid=4458512&siteUrl=https://dataverse.harvard.edu) in the above:
 * *how many people died by covid?*
-* *did females recovered more than males?*
+* *did females recover more than males?*
 * *what is the average number of days between admission date and death?*
 * *calculate the severity by gender*
 
