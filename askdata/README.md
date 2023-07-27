@@ -28,9 +28,12 @@ We plan to expand the functionalities of this tool.
 * add basic plotting functionalities
 
 ## To deploy on [shinyapps.io](https://www.shinyapps.io)
-At present ShinyApps.io supports only python 3.10 so make sure your local environment is based on this release
+At present ShinyApps.io supports only python 3.10 so make sure your local environment is based on this release.
+
 Hint: you can create an environment after installing [Anaconda](https://docs.anaconda.com/free/anaconda/install/index.html) with 
+
 `conda create -n shinyapp python=3.10`
+
 `conda activate shinyapp`
 * adjust the variables `inputUrl` and `OPENAI_API_KEY` to your needs
 * create a free account at [shinyapps.io](https://www.shinyapps.io)
