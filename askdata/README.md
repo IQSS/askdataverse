@@ -27,7 +27,7 @@ We plan to expand the functionalities of this tool.
 * add basic statical analysis functionalities
 * add basic plotting functionalities
 
-## Deploy to [shinyapps.io](https://www.shinyapps.io)
+## Deploy to [ShinyApps.io](https://www.shinyapps.io)
 At present ShinyApps.io supports only python 3.10 so make sure your local environment is based on this release. 
 *Hint:* you can create an environment after installing [Anaconda](https://docs.anaconda.com/free/anaconda/install/index.html) with 
 
