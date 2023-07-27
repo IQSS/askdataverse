@@ -23,7 +23,7 @@ We plan to expand the functionalities of this tool.
 * the generated SQL query can be too large for the context window of the LLM
 
 ## Plans:
-* fix some of the issues
+* fix some of the above issues
 * add basic statical analysis functionalities
 * add basic plotting functionalities
 
