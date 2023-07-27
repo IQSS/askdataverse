@@ -1,4 +1,4 @@
-# Askdata
+# AskData
 
 Experimental code to query tabular data with natural language queries. The LLM looks only at the content of the tabular data and not at the dataset description or any metadata.
 
