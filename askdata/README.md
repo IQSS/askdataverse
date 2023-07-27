@@ -64,7 +64,7 @@ The parameter `dataset_pid` is collected but not yet used.
 
 ## Adding AskData as an external tool
 
-First, download [askdata.json](askdata.json)
+This section assumes you are the local Dataverse admin: First, download [askdata.json](askdata.json)
 
 Optionally, edit `toolUrl` if you have installed AskData on your own server.
 
