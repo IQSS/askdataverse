@@ -40,7 +40,7 @@ Hint: you can create an environment after installing [Anaconda](https://docs.ana
 * install the [application token](https://docs.posit.co/shinyapps.io/getting-started.html) 
 * run the ["install certificates.command"](https://www.geeksforgeeks.org/how-to-install-and-use-ssl-certificate-in-python/) for your python version
 * run `pip install -r requirements.txt`
-* in your shell do: `export CONNECT_REQUEST_TIMEOUT=36000`. You can use a larger number if {rsconnect} gives a timeout error. This is a shinyapps.io issue
+* in your shell type: `export CONNECT_REQUEST_TIMEOUT=36000` and the return key. You can use a larger number if {rsconnect} gives a timeout error. This is a shinyapps.io issue
 * deploy with `rsconnect deploy shiny ./ --name askdataverse --title askdata --exclude *.db`
 
 
