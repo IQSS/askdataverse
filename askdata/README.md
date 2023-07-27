@@ -35,7 +35,7 @@ Hint: you can create an environment after installing [Anaconda](https://docs.ana
 `conda create -n shinyapp python=3.10`
 
 `conda activate shinyapp`
-* adjust the variables `inputUrl` and `OPENAI_API_KEY` to your needs
+* adjust the variables `inputUrl` and `OPENAI_API_KEY` in the [app.py](app.py) file to your needs
 * create a free account at [shinyapps.io](https://www.shinyapps.io)
 * install the [application token](https://docs.posit.co/shinyapps.io/getting-started.html) 
 * run the ["install certificates.command"](https://www.geeksforgeeks.org/how-to-install-and-use-ssl-certificate-in-python/) for your python first
