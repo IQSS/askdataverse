@@ -112,6 +112,8 @@ Enjoy
 
 First, download [askdata.json](askdata.json)
 
+Optionally, edit `toolUrl` if you have installed AskData on your own server.
+
 As explained in the [Dataverse Guides](https://guides.dataverse.org/en/latest/admin/external-tools.html), run the following command:
 
 `curl -X POST -H 'Content-type: application/json' http://localhost:8080/api/admin/externalTools --upload-file askdata.json`
