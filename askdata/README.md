@@ -75,6 +75,9 @@ and in particular, if you use the data from Example 1 in the above:
 
 and if you use the data from Example 2 in the above:
 * how many people died by covid?
-* 
+* did females recovered more than males?
+
+
+etc, the limit is your creativity!
 
 Enjoy!
