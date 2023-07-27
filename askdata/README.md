@@ -1,0 +1,44 @@
+# askdata
+
+Experimental code to query tabular data with natural language queries.
+The code takes the input natural language query, transforms it into a SQL query, executes the query on the database and then tries to translate the resul back into natural language. 
+
+The code is meant not have memory, so each query is independent. This is a feature!
+
+It exploits [LangChain](https://www.langchain.com) agents for the scope and OpenAI.
+
+Requires an [OpenAI](https://openai.com) `key` to run (see code).
+
+In the near future the underlying LLM model will be replaced by other models.
+
+If you already use another large language model, as long as it is supported
+by [LangChain](https://www.langchain.com), the code requires no modification.
+
+We plan to expand the functionalities of this tool.
+
+## Known issues:
+* can generate hallucinations
+* can be stuck into a loop that lead to no aswer or error
+* there is no control over long queries, so the code may return an error
+* the generated SQL query can be too large for the context window of the LLM
+
+## Plans:
+* fix some of the issues
+* add basic statical analysis functionalities
+* add basic plotting functionalities
+
+## To deploy on [shinyapps.io](https://www.shinyapps.io)
+At present ShinyApps.io supports only python 3.10 so make sure your local environment is based on this release
+Hint: you can create an environment after installing [Anaconda](https://docs.anaconda.com/free/anaconda/install/index.html) with 
+`conda create -n shinyapp python=3.10`
+`conda activate shinyapp`
+* adjust the variables `inputUrl` and `OPENAI_API_KEY` to your needs
+* create a free account at [shinyapps.io](https://www.shinyapps.io)
+* install the [application token](https://docs.posit.co/shinyapps.io/getting-started.html) 
+* run the ["install certificates.command"](https://www.geeksforgeeks.org/how-to-install-and-use-ssl-certificate-in-python/) for your python first
+* run `pip install -r requirements.txt`
+* in your shell do: `export CONNECT_REQUEST_TIMEOUT=36000`. You can use a larger number if {rsconnect} gives a timeout error. This is a shinyapps.io issue
+* deploy with `rsconnect deploy shiny ./ --name askdataverse --title askdata --exclude *.db`
+
+
+Enjoy!

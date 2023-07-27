@@ -1,0 +1,9 @@
+# requirements.txt
+Jinja2
+langchain
+openai
+shiny>=0.4
+pandas
+duckdb
+duckdb_engine
+
