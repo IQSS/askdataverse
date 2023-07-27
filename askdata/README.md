@@ -17,7 +17,7 @@ by [LangChain](https://www.langchain.com), the code requires no modification.
 
 We plan to expand the functionalities of this tool.
 
-## Known issues:
+## Known issues
 * can generate hallucinations
 * can remain stuck into a loop that lead to no aswer or an error
 * there is no control over long queries, so the code may return an error
@@ -26,7 +26,7 @@ We plan to expand the functionalities of this tool.
 * the notifications appear at the bottom of the web page
 * works only on tabular data
 
-## Plans:
+## Future plans
 * fix some of the above issues
 * add basic statistical analysis functionalities
 * add basic plotting functionalities
@@ -54,14 +54,14 @@ Note: you have to replace `askdataverse` to your ShinyApps.io domain.
 
 
 
-## Usage 
+## Parameters 
 This script requires two arguments: `fileId` and `siteUrl`. 
 The parameter `dataset_pid` is collected but not yet used.
 
 * for Harvard Dataverse `siteUrl` always equals to [https://dataverse.harvard.edu](https://dataverse.harvard.edu)
 * `fileId` is the internal identifier in the Dataverse database
 
-### Examples
+## Examples
 Although some interesting queries may fail for a given data, in general it works pretty well.
 The more you think *sql-ish*, the higher the success to get an answer.
 Generic queries are calculated on the first few rows of the database, so sometimes you need to force the queries like those in Example 3 below.
@@ -78,7 +78,7 @@ or, if run locally (replace `64504` with your port):
 
 
   
-### Questions:
+### Asking the right questions
 * *what is this data about?* (this is the default starting question)
 * *what's the most interesting thing about this data?*
 * *surprise me with this data* (this is a risky question, but helps to understand the limits of this tool)
