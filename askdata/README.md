@@ -24,7 +24,7 @@ We plan to expand the functionalities of this tool.
 
 ## Plans:
 * fix some of the above issues
-* add basic statical analysis functionalities
+* add basic statistical analysis functionalities
 * add basic plotting functionalities
 
 ## Deploy to [ShinyApps.io](https://www.shinyapps.io)
