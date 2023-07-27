@@ -107,3 +107,11 @@ etc, the limit is your creativity... and the LLM ability to answer!
 
 
 Enjoy
+
+## Adding AskDataverse as an external tool
+
+First, download [askdata.json](askdata.json)
+
+As explained in the [Dataverse Guides](https://guides.dataverse.org/en/latest/admin/external-tools.html), run the following command:
+
+`curl -X POST -H 'Content-type: application/json' http://localhost:8080/api/admin/externalTools --upload-file askdata.json`

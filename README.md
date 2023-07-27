@@ -11,11 +11,3 @@ Code in this repository is totally experimental. We do not guarantee any long te
 You are free to re-utilize this code any way you like following the license terms.
 
 Enjoy!
-
-## Adding AskDataverse as an external tool
-
-First, download [askdataverse.json](askdataverse.json)
-
-As explained in the [Dataverse Guides](https://guides.dataverse.org/en/latest/admin/external-tools.html), run the following command:
-
-`curl -X POST -H 'Content-type: application/json' http://localhost:8080/api/admin/externalTools --upload-file askdataverse.json`
