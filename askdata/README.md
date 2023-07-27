@@ -64,7 +64,7 @@ The parameter `dataset_pid` is collected but not yet used.
 ### Examples
 Although some interesting queries may fail for a given data, in general it works pretty well.
 The more you think *sql-ish*, the higher the success to get an answer.
-Generic queries are calculated on the first few rows of the database, so sometimes you need to force the queries like:
+Generic queries are calculated on the first few rows of the database, so sometimes you need to force the queries like those in Example 3 below.
 
 * Example 1: *Data about smoking habits.* [https://askdataverse.shinyapps.io/askdata/?fileid=4862482&siteUrl=https://dataverse.harvard.edu](https://askdataverse.shinyapps.io/askdata/?fileid=4862482&siteUrl=https://dataverse.harvard.edu)
 
