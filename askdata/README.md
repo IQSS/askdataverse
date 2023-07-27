@@ -62,22 +62,23 @@ or, if run locally (replace `64504` with your port):
 * Example 2: [https://askdataverse.shinyapps.io/askdata/?fileid=4458512&siteUrl=https://dataverse.harvard.edu](https://askdataverse.shinyapps.io/askdata/?fileid=4458512&siteUrl=https://dataverse.harvard.edu)
   
 ### Questions:
-* what is this data about? (this is the default starting question)
-* what's the most interesting thing about this data?
-* surprise me with this data (this is a risky question, but helps to understand the limits of this tool)
+* *what is this data about?* (this is the default starting question)
+* *what's the most interesting thing about this data?*
+* *surprise me with this data* (this is a risky question, but helps to understand the limits of this tool)
 
 
 and in particular, if you use the data from Example 1 in the above:
-* do males smoke more than women?
-* what is the average age of smokers by city?
-* where people smoke the most?
+* *do males smoke more than women?*
+* *what is the average age of smokers by city?*
+* *where people smoke the most?*
 
 
 and if you use the data from Example 2 in the above:
-* how many people died by covid?
-* did females recovered more than males?
+* *how many people died by covid?*
+* *did females recovered more than males?*
+* *what is the average number of days between admission date and death?*
+* *calculate the severity by gender*
 
-
-etc, the limit is your creativity!
+etc, the limit is your creativity... and the LLM ability to answer!
 
 Enjoy!
