@@ -24,11 +24,13 @@ We plan to expand the functionalities of this tool.
 * the generated SQL query can be too large for the context window of the LLM
 * if the data is too large the tool may fail to launch (out of memory)
 * the notifications appear at the bottom of the web page
+* works only on tabular data
 
 ## Plans:
 * fix some of the above issues
 * add basic statistical analysis functionalities
 * add basic plotting functionalities
+* extend to other data formats
 
 ## Deploy to [ShinyApps.io](https://www.shinyapps.io)
 At present ShinyApps.io supports only python 3.10 so make sure your local environment is based on this release. 
@@ -64,15 +66,15 @@ Although some interesting queries may fail for a given data, in general it works
 The more you think *sql-ish*, the higher the success to get an answer.
 Generic queries are calculated on the first few rows of the database, so sometimes you need to force the queries like:
 
-* Example 1: data about smoking habits [https://askdataverse.shinyapps.io/askdata/?fileid=4862482&siteUrl=https://dataverse.harvard.edu](https://askdataverse.shinyapps.io/askdata/?fileid=4862482&siteUrl=https://dataverse.harvard.edu)
+* Example 1: *Data about smoking habits.* [https://askdataverse.shinyapps.io/askdata/?fileid=4862482&siteUrl=https://dataverse.harvard.edu](https://askdataverse.shinyapps.io/askdata/?fileid=4862482&siteUrl=https://dataverse.harvard.edu)
 
 
 or, if run locally (replace `64504` with your port):
 * [http://localhost:64504/?fileid=4862482&siteUrl=https://dataverse.harvard.edu](http://localhost:64504/?fileid=4862482&siteUrl=https://dataverse.harvard.edu)
 
-* Example 2: data about COVID-19 and hospitalization [https://askdataverse.shinyapps.io/askdata/?fileid=4458512&siteUrl=https://dataverse.harvard.edu](https://askdataverse.shinyapps.io/askdata/?fileid=4458512&siteUrl=https://dataverse.harvard.edu)
+* Example 2: *Data about COVID-19 and hospitalization.* [https://askdataverse.shinyapps.io/askdata/?fileid=4458512&siteUrl=https://dataverse.harvard.edu](https://askdataverse.shinyapps.io/askdata/?fileid=4458512&siteUrl=https://dataverse.harvard.edu)
 
-* Example 3: data about metadata [https://askdataverse.shinyapps.io/askdata/?fileid=6570377&siteUrl=https://dataverse.harvard.edu](https://askdataverse.shinyapps.io/askdata/?fileid=6570377&siteUrl=https://dataverse.harvard.edu)
+* Example 3: *Data about metadata.* [https://askdataverse.shinyapps.io/askdata/?fileid=6570377&siteUrl=https://dataverse.harvard.edu](https://askdataverse.shinyapps.io/askdata/?fileid=6570377&siteUrl=https://dataverse.harvard.edu)
 
 
   
