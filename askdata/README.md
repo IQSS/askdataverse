@@ -61,6 +61,17 @@ The parameter `dataset_pid` is collected but not yet used.
 * for Harvard Dataverse `siteUrl` always equals to [https://dataverse.harvard.edu](https://dataverse.harvard.edu)
 * `fileId` is the internal identifier in the Dataverse database
 
+
+## Adding AskDataverse as an external tool
+
+First, download [askdata.json](askdata.json)
+
+Optionally, edit `toolUrl` if you have installed AskData on your own server.
+
+As explained in the [Dataverse Guides](https://guides.dataverse.org/en/latest/admin/external-tools.html), run the following command:
+
+`curl -X POST -H 'Content-type: application/json' http://localhost:8080/api/admin/externalTools --upload-file askdata.json`
+
 ## Examples
 Although some interesting queries may fail for a given data, in general it works pretty well.
 The more you think *sql-ish*, the higher the success to get an answer.
@@ -107,13 +118,3 @@ etc, the limit is your creativity... and the LLM ability to answer!
 
 
 Enjoy
-
-## Adding AskDataverse as an external tool
-
-First, download [askdata.json](askdata.json)
-
-Optionally, edit `toolUrl` if you have installed AskData on your own server.
-
-As explained in the [Dataverse Guides](https://guides.dataverse.org/en/latest/admin/external-tools.html), run the following command:
-
-`curl -X POST -H 'Content-type: application/json' http://localhost:8080/api/admin/externalTools --upload-file askdata.json`
