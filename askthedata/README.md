@@ -62,7 +62,7 @@ The parameter `dataset_pid` is collected but not yet used.
 * `fileId` is the internal identifier in the Dataverse database
 
 
-## Adding AsThekData as an external tool
+## Adding AskTheData as an external tool
 
 This section assumes you are the local Dataverse admin. First, download [askthedata.json](askthedata.json)
 
