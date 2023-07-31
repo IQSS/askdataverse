@@ -66,7 +66,7 @@ The parameter `dataset_pid` is collected but not yet used.
 
 This section assumes you are the local Dataverse admin. First, download [askthedata.json](askthedata.json)
 
-Optionally, edit `toolUrl` if you have installed AskData on your own server.
+Optionally, edit `toolUrl` if you have installed AskTheData on your own server.
 
 As explained in the [Dataverse Guides](https://guides.dataverse.org/en/latest/admin/external-tools.html), run the following command:
 
