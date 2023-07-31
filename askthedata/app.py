@@ -36,11 +36,12 @@ SOFTWARE.
 # for Harvard Dataverse siteUrl always equals to https://dataverse.harvard.edu
 # fileId is the internal identifier in the Dataverse database
 # example of use:
-# https://askdataverse.shinyapps.io/askdata/?fileid=4862482siteUrl=https://dataverse.harvard.edu
+# https://askdataverse.shinyapps.io/askthedata/?fileid=4862482siteUrl=https://dataverse.harvard.edu
 # or, if run locally
 # http://localhost:64504/?fileid=4862482&siteUrl=https://dataverse.harvard.edu
 # replace 64504 with your port
 
+# AskTheData
 
 from shiny import  App, reactive, render, ui
 import asyncio
@@ -91,8 +92,8 @@ def app_ui(request):
     global dataurl
     global apiStr
 
-    fileid = request.query_params.get('fileid')
-    dataset_pid = request.query_params.get('dataset_pid')
+    fileid = request.query_params.get('fileId')
+    dataset_pid = request.query_params.get('datasetPid')
     siteUrl = request.query_params.get('siteUrl')
     if fileid is None:
         fileid = ''

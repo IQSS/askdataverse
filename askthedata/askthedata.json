@@ -1,0 +1,25 @@
+{
+  "displayName": "Ask the Data",
+  "description": "A tool that allows you to ask questions about Dataverse tabular data.",
+  "toolName": "AskTheData",
+  "scope": "file",
+  "types": [
+    "query"
+  ],
+  "toolUrl": "https://askdataverse.shinyapps.io/askthedata",
+  "contentType": "text/tab-separated-values",
+  "httpMethod":"GET",
+  "toolParameters": {
+    "queryParameters": [
+      {
+        "fileId": "{fileId}"
+      },
+      {
+        "datasetPid": "{datasetPid}"
+      },
+      {
+        "siteUrl": "{siteUrl}"
+      }
+    ]
+  }
+}
