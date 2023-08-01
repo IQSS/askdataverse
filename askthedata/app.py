@@ -32,13 +32,14 @@ SOFTWARE.
 # This code, my first python code, was created in a night. Be merciful.
 
 # This script requires two arguments: `fileId` and `siteUrl`. 
-# The parameter `dataset_pid` is collected but not yet used
+# Note: The url arguments are case sensitive.
+# The parameter `datasetPid` is collected but not yet used
 # for Harvard Dataverse siteUrl always equals to https://dataverse.harvard.edu
 # fileId is the internal identifier in the Dataverse database
 # example of use:
-# https://askdataverse.shinyapps.io/askthedata/?fileid=4862482siteUrl=https://dataverse.harvard.edu
+# https://askdataverse.shinyapps.io/askthedata/?fileId=4862482siteUrl=https://dataverse.harvard.edu
 # or, if run locally
-# http://localhost:64504/?fileid=4862482&siteUrl=https://dataverse.harvard.edu
+# http://localhost:64504/?fileId=4862482&siteUrl=https://dataverse.harvard.edu
 # replace 64504 with your port
 
 # AskTheData
@@ -78,7 +79,7 @@ OPENAI_API_KEY = 'xxxxxxxxx' # your OpenAI key
 # We use OpenAI `text-davinci-003` but it can be changed with other models supported by LangChain
 myllm = llm=OpenAI(temperature=0,openai_api_key=OPENAI_API_KEY, model_name = "text-davinci-003")
 
-# these variable must remain global
+# these variables must remain global
 apiStr = '/api/access/datafile/'
 fileid = ""
 dataset_pid = ""
