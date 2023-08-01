@@ -77,15 +77,15 @@ Although some interesting queries may fail for a given data, in general it works
 The more you think *sql-ish*, the higher the success to get an answer.
 Generic queries are calculated on the first few rows of the database, so sometimes you need to force the queries like those in Example 3 below.
 
-* Example 1: *Data about smoking habits.* [https://askdataverse.shinyapps.io/askthedata/?fileid=4862482&siteUrl=https://dataverse.harvard.edu](https://askdataverse.shinyapps.io/askthedata/?fileid=4862482&siteUrl=https://dataverse.harvard.edu)
+* Example 1: *Data about smoking habits.* [https://askdataverse.shinyapps.io/askthedata/?fileId=4862482&siteUrl=https://dataverse.harvard.edu](https://askdataverse.shinyapps.io/askthedata/?fileId=4862482&siteUrl=https://dataverse.harvard.edu)
 
 
 or, if run locally (replace `64504` with your port):
-* [http://localhost:64504/?fileid=4862482&siteUrl=https://dataverse.harvard.edu](http://localhost:64504/?fileid=4862482&siteUrl=https://dataverse.harvard.edu)
+* [http://localhost:64504/?fileId=4862482&siteUrl=https://dataverse.harvard.edu](http://localhost:64504/?fileId=4862482&siteUrl=https://dataverse.harvard.edu)
 
-* Example 2: *Data about COVID-19 and hospitalization.* [https://askdataverse.shinyapps.io/askthedata/?fileid=4458512&siteUrl=https://dataverse.harvard.edu](https://askdataverse.shinyapps.io/askthedata/?fileid=4458512&siteUrl=https://dataverse.harvard.edu)
+* Example 2: *Data about COVID-19 and hospitalization.* [https://askdataverse.shinyapps.io/askthedata/?fileId=4458512&siteUrl=https://dataverse.harvard.edu](https://askdataverse.shinyapps.io/askthedata/?fileId=4458512&siteUrl=https://dataverse.harvard.edu)
 
-* Example 3: *Data about metadata.* [https://askdataverse.shinyapps.io/askthedata/?fileid=6570377&siteUrl=https://dataverse.harvard.edu](https://askdataverse.shinyapps.io/askthedata/?fileid=6570377&siteUrl=https://dataverse.harvard.edu)
+* Example 3: *Data about metadata.* [https://askdataverse.shinyapps.io/askthedata/?fileId=6570377&siteUrl=https://dataverse.harvard.edu](https://askdataverse.shinyapps.io/askthedata/?fileId=6570377&siteUrl=https://dataverse.harvard.edu)
 
 
   
@@ -95,20 +95,20 @@ or, if run locally (replace `64504` with your port):
 * *surprise me with this data* (this is a risky question, but helps to understand the limits of this tool)
 
 
-and in particular, if you use the data from [Example 1](https://askdataverse.shinyapps.io/askthedata/?fileid=4862482&siteUrl=https://dataverse.harvard.edu) in the above:
+and in particular, if you use the data from [Example 1](https://askdataverse.shinyapps.io/askthedata/?fileId=4862482&siteUrl=https://dataverse.harvard.edu) in the above:
 * *do males smoke more than women?*
 * *what is the average age of smokers by city?*
 * *where people smoke the most?*
 
 
-and if you use the data from [Example 2](https://askdataverse.shinyapps.io/askthedata/?fileid=4458512&siteUrl=https://dataverse.harvard.edu) in the above:
+and if you use the data from [Example 2](https://askdataverse.shinyapps.io/askthedata/?fileId=4458512&siteUrl=https://dataverse.harvard.edu) in the above:
 * *how many people died by covid?*
 * *did females recover more than males?*
 * *what is the average number of days between admission date and death?*
 * *calculate the severity by gender*
 
 
-and if you use the data from [Example 3](https://askdataverse.shinyapps.io/askthedata/?fileid=6570377&siteUrl=https://dataverse.harvard.edu) in the above:
+and if you use the data from [Example 3](https://askdataverse.shinyapps.io/askthedata/?fileId=6570377&siteUrl=https://dataverse.harvard.edu) in the above:
 * *what is this data about?* may fail (answering `This data is about astrophysics`) as the system looks at the first rows without further indication. But forcing it to go deeper may work. Try this (eventually twice):
 * *Look at the first 100 rows and tell me what is this data about*
 * *calculate the abundance of different disciplines*
