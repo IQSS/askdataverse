@@ -64,7 +64,7 @@ The parameter `dataset_pid` is collected but not yet used.
 
 ## Adding AskTheData as an external tool
 
-This section assumes you are the local Dataverse admin. First, download [askthedata.json](askthedata.json)
+This section assumes you are the local Dataverse admin. First, download [askthedata.json](https://raw.githubusercontent.com/IQSS/askdataverse/main/askthedata/askthedata.json)
 
 Optionally, edit `toolUrl` if you have installed AskTheData on your own server.
 
