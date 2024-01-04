@@ -40,7 +40,7 @@ At present ShinyApps.io supports only python 3.10 so make sure your local enviro
 
 `conda activate shinyapp`
 * these instruction assume the deployment is to the `askdataverse` ShinyApps.io domain. You should change it to your ShinyApps.io domain.
-* adjust the variable `OPENAI_API_KEY` in the [key.json](key.json) file to your needs. If you do not deploy pn ShinyApps.io, you can replace this file with setting properly an environment variable `OPENAI_API_KEY` and retrieve it via `os.environ['OPENAI_API_KEY']` in [app.py](app.py)
+* adjust the variable `OPENAI_API_KEY` in the [key.json](key.json) file to your needs. If you do not deploy on ShinyApps.io, you can replace this file with setting properly an environment variable `OPENAI_API_KEY` and retrieve it via `os.environ['OPENAI_API_KEY']` in [app.py](app.py)
 * create a free account at [shinyapps.io](https://www.shinyapps.io). With this you will get your domain to replace `askdataverse`.
 * install [`rsconnect`](https://pypi.org/project/rsconnect-python/)
 * install the ShinyApps.io [application token](https://docs.posit.co/shinyapps.io/getting-started.html) 
