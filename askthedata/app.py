@@ -1,6 +1,6 @@
 """ MIT License
 
-Copyright (c) 2023 Institute for Quantitative Social Science, Stefano M. Iacus
+Copyright (c) 2023-2024 Institute for Quantitative Social Science, Stefano M. Iacus
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -68,16 +68,27 @@ from langchain.agents import create_sql_agent
 from langchain.agents.agent_toolkits import SQLDatabaseToolkit
 from langchain.sql_database import SQLDatabase
 from langchain.llms.openai import OpenAI
-from langchain.agents import AgentExecutor
+from langchain.agents import AgentType
 
 
 mypath = "./"
 os.chdir(mypath)
 
-OPENAI_API_KEY = 'xxxxxxxxx' # your OpenAI key
+# put your OPENAI_API_KEY in the key.json file in the form
+# {"OPENAI_API_KEY" :"xxxxx"}
+# unfortunately it is not possible to pass environmental variables
+# to shinyapss.io
+
+tmp = json.load(open("key.json"))
+
+OPENAI_API_KEY = tmp['OPENAI_API_KEY']
 
 # We use OpenAI `text-davinci-003` but it can be changed with other models supported by LangChain
-myllm = llm=OpenAI(temperature=0,openai_api_key=OPENAI_API_KEY, model_name = "text-davinci-003")
+#myllm = llm=OpenAI(temperature=0,openai_api_key=OPENAI_API_KEY, model_name = "text-davinci-003")
+
+# 2024-01-04: text-davinci-003 deprecated on Jan 4th, 2024, we now use gpt3.5-turbo
+
+myllm = llm=OpenAI(temperature=0,openai_api_key=OPENAI_API_KEY) 
 
 # these variables must remain global
 apiStr = '/api/access/datafile/'
@@ -161,7 +172,8 @@ def server(input, output, session):
                     HaveQuery.set(True)    # we need this here
                 ui.notification_show("Thinking...", id='thinkingID', duration=None)    
                 agent_executor = create_sql_agent(
-                    llm=myllm,toolkit=toolkit,verbose=True)   
+                    llm=myllm,toolkit=toolkit,verbose=True,
+                    agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,)   
                 ans = agent_executor.run(f"{this_query}")
                 ui.notification_remove('thinkingID')    
         return f"{ans}"    
