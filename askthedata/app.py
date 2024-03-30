@@ -25,9 +25,15 @@ SOFTWARE.
 # python=3.10
 # Jinja2
 # langchain
+# langchain_openai
 # openai
-# shiny
+# shiny>=0.4
 # pandas
+### the following ones only for statistical analysis
+# statsmodels
+# seaborn
+# matplotlib
+# tabulate
 
 # This code, my first python code, was created in a night. Be merciful.
 
@@ -37,7 +43,7 @@ SOFTWARE.
 # for Harvard Dataverse siteUrl always equals to https://dataverse.harvard.edu
 # fileId is the internal identifier in the Dataverse database
 # example of use:
-# https://askdataverse.shinyapps.io/askthedata/?fileId=4862482siteUrl=https://dataverse.harvard.edu
+# https://askdataverse.shinyapps.io/askthedata/?fileId=4862482&siteUrl=https://dataverse.harvard.edu
 # or, if run locally
 # http://localhost:64504/?fileId=4862482&siteUrl=https://dataverse.harvard.edu
 # replace 64504 with your port
@@ -51,24 +57,18 @@ from pathlib import Path
 import pandas as pd
 import requests   # for urls 
 import io
-import sqlite3
 import os
 from htmltools import HTML, div
 import string
 import random
-import duckdb
-import duckdb_engine
 
 from urllib.request import urlopen
 import json
 import urllib.parse
 from urllib.parse import urlparse, parse_qs
 
-from langchain.agents import create_sql_agent
-from langchain.agents.agent_toolkits import SQLDatabaseToolkit
-from langchain.sql_database import SQLDatabase
-from langchain.llms.openai import OpenAI
-from langchain.agents import AgentType
+from langchain_openai import ChatOpenAI
+from langchain_experimental.agents import create_pandas_dataframe_agent
 
 
 mypath = "./"
@@ -86,9 +86,10 @@ OPENAI_API_KEY = tmp['OPENAI_API_KEY']
 # We use OpenAI `text-davinci-003` but it can be changed with other models supported by LangChain
 #myllm = llm=OpenAI(temperature=0,openai_api_key=OPENAI_API_KEY, model_name = "text-davinci-003")
 
-# 2024-01-04: text-davinci-003 deprecated on Jan 4th, 2024, we now use gpt3.5-turbo
+# 2024-01-04: text-davinci-003 deprecated on Jan 4th, 2024, we now use gpt-3.5-turbo
+# 2024-03-30: switched from SQL to pandas agents
 
-myllm = llm=OpenAI(temperature=0,openai_api_key=OPENAI_API_KEY) 
+myllm = ChatOpenAI(temperature=0,openai_api_key=OPENAI_API_KEY,model_name="gpt-3.5-turbo") 
 
 # these variables must remain global
 apiStr = '/api/access/datafile/'
@@ -103,6 +104,7 @@ def app_ui(request):
     global dataset_pid
     global dataurl
     global apiStr
+    
 
     fileid = request.query_params.get('fileId')
     dataset_pid = request.query_params.get('datasetPid')
@@ -128,6 +130,7 @@ def server(input, output, session):
     HaveData = reactive.Value(None)
     HaveQuery = reactive.Value(None)
     sqlDB = reactive.Value(None)
+    mydf = reactive.Value(None)
 
     @reactive.Calc
     async def load_tabular_data():
@@ -137,17 +140,9 @@ def server(input, output, session):
         req = requests.get(dataurl).content
         data = pd.read_csv(io.StringIO(req.decode('utf-8')), sep=None, engine="python")
         df = pd.DataFrame(data)
-        tmpDB = ''.join(random.choices(string.ascii_uppercase +
-                             string.digits, k=10))
-        tmpDB = tmpDB + '.db'
-        db = os.path.join(mypath, tmpDB)
-        sqlDB.set(db)       
-        if os.path.exists(db):
-            os.remove(db)
-        con = duckdb.connect(db)
-        con.execute('CREATE TABLE data AS SELECT * FROM df')
         HaveData.set(True) 
         ui.notification_remove('loadingID')    
+        mydf.set(df)
         return df
    
     @output
@@ -163,20 +158,15 @@ def server(input, output, session):
         with reactive.isolate():
             ans = "Waiting for you..."
             if(HaveData.get()):
-                mydb = SQLDatabase.from_uri(  "duckdb:///" + sqlDB.get() )
-                toolkit = SQLDatabaseToolkit(db=mydb,llm=myllm)
                 if HaveQuery.get():
                     this_query = input.query()
                 else:
                     this_query = 'What is this data about?' # default initial query
                     HaveQuery.set(True)    # we need this here
                 ui.notification_show("Thinking...", id='thinkingID', duration=None)    
-                agent_executor = create_sql_agent(
-                    llm=myllm,toolkit=toolkit,verbose=True,
-                    agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,)   
-                ans = agent_executor.run(f"{this_query}")
+                agent_executor = create_pandas_dataframe_agent(myllm, mydf.get(), agent_type="openai-tools", verbose=True)
+                ans = agent_executor.invoke(f"{this_query}")
                 ui.notification_remove('thinkingID')    
-        return f"{ans}"    
+        return f"{ans['output']}"    
         
 app = App(app_ui, server)
-

@@ -17,19 +17,26 @@ by [LangChain](https://www.langchain.com), the code requires no modification.
 
 We plan to expand the functionalities of this tool.
 
+## New features as of 2024-03-30
+* moved from an sql agent to a pandas dataframe agent
+* added statistical analysis
+
+## New features as of 2024-01-04
+* text-davinci-003 deprecated on Jan 4th, 2024, we now use gpt-3.5-turbo
+
 ## Known issues
 * can generate hallucinations
 * can remain stuck into a loop that lead to no answer or an error
 * there is no control over long queries, so the code may return an error
-* the generated SQL query can be too large for the context window of the LLM
+* the generated query can be too large for the context window of the LLM
 * if the data is too large the tool may fail to launch (out of memory)
 * the notifications appear at the bottom of the web page
 * works only on tabular data
 
 ## Future plans
 * fix some of the above issues
-* add basic statistical analysis functionalities
-* add basic plotting functionalities
+* add basic statistical analysis functionalities (done!)
+* add basic plotting functionalities (works only locally)
 * extend to other data formats
 
 ## Deploy to [ShinyApps.io](https://www.shinyapps.io)
@@ -47,7 +54,7 @@ At present ShinyApps.io supports only python 3.10 so make sure your local enviro
 * run the ["install certificates.command"](https://www.geeksforgeeks.org/how-to-install-and-use-ssl-certificate-in-python/) for your python version
 * in your shell type: `pip install -r requirements.txt`
 * in your shell type: `export CONNECT_REQUEST_TIMEOUT=36000`. You can use a larger number if `rsconnect` fails due to a timeout error. This is a `shinyapps.io` issue
-* deploy with: `rsconnect deploy shiny ./ --name askdataverse --title askthedata --exclude *.db`
+* deploy with: `rsconnect deploy shiny ./ --name askdataverse --title askthedata key.json`
 
 
 Note: you have to replace `askdataverse` to your ShinyApps.io domain.

@@ -1,0 +1,12 @@
+{
+    "https://api.shinyapps.io": {
+        "server_url": "https://api.shinyapps.io",
+        "filename": "/Users/jago/github/askdataverse/askthedata",
+        "app_url": "https://askdataverse.shinyapps.io/askthedata1/",
+        "app_id": 11622530,
+        "app_guid": null,
+        "title": "askthedata",
+        "app_mode": "python-shiny",
+        "app_store_version": 1
+    }
+}

@@ -1,9 +1,17 @@
 # requirements.txt
 Jinja2
 langchain
+langchain_openai
+langchain_experimental
 openai
 shiny>=0.4
 pandas
-duckdb
-duckdb_engine
+# only for statistical analysis
+statsmodels
+seaborn
+matplotlib
+tabulate
+scikit-learn 
+geopy
+folium
 
