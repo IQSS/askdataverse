@@ -164,9 +164,11 @@ def server(input, output, session):
                     this_query = 'What is this data about?' # default initial query
                     HaveQuery.set(True)    # we need this here
                 ui.notification_show("Thinking...", id='thinkingID', duration=None)    
-                agent_executor = create_pandas_dataframe_agent(myllm, mydf.get(), agent_type="openai-tools", verbose=True)
+                agent_executor = create_pandas_dataframe_agent(myllm, mydf.get(), agent_type="openai-tools", 
+                                                               verbose=True, allow_dangerous_code=True)
                 ans = agent_executor.invoke(f"{this_query}")
                 ui.notification_remove('thinkingID')    
         return f"{ans['output']}"    
         
 app = App(app_ui, server)
+
