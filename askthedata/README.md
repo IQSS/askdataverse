@@ -59,7 +59,19 @@ At present ShinyApps.io supports only python 3.10 so make sure your local enviro
 
 Note: you have to replace `askdataverse` to your ShinyApps.io domain.
 
+## Deployment with containers
+Move into the `askthedata` folder and build the container
 
+`docker build -t askthedata .`
+
+Then add the `key.json` at runtime with
+
+```
+docker run -d -p 8085:8085 \
+  -v $(pwd)/key.json:/app/key.json:ro \
+  --name askthedata askthedata
+```
+Connect to port `8085`.
 
 ## Parameters 
 This script requires two arguments: `fileId` and `siteUrl`. 
