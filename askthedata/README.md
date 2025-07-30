@@ -17,6 +17,9 @@ by [LangChain](https://www.langchain.com), the code requires no modification.
 
 We plan to expand the functionalities of this tool.
 
+## New features as of 2025-07-30
+* switched to model gpt-4o-mini (not sure it is any better though)
+
 ## New features as of 2024-03-30
 * moved from an sql agent to a pandas dataframe agent
 * added statistical analysis
@@ -123,7 +126,7 @@ and in particular, if you use the data from [Example 1](https://askdataverse.shi
 and if you use the data from [Example 2](https://askdataverse.shinyapps.io/askthedata/?fileId=4458512&siteUrl=https://dataverse.harvard.edu) in the above:
 * *how many people died by covid?*
 * *did females recover more than males?*
-* *what is the average number of days between admission date and death?*
+* *what is the average number of days between admission date and death?* [no longer working on gpt-4o-mini because it converts dates to milliseconds!]
 * *calculate the severity by gender*
 
 

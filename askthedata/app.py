@@ -89,7 +89,8 @@ OPENAI_API_KEY = tmp['OPENAI_API_KEY']
 # 2024-01-04: text-davinci-003 deprecated on Jan 4th, 2024, we now use gpt-3.5-turbo
 # 2024-03-30: switched from SQL to pandas agents
 
-myllm = ChatOpenAI(temperature=0,openai_api_key=OPENAI_API_KEY,model_name="gpt-3.5-turbo") 
+#myllm = ChatOpenAI(temperature=0,openai_api_key=OPENAI_API_KEY,model_name="gpt-3.5-turbo") 
+myllm = ChatOpenAI(temperature=0,openai_api_key=OPENAI_API_KEY,model_name="gpt-4o-mini") 
 
 # these variables must remain global
 apiStr = '/api/access/datafile/'

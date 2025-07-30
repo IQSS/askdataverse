@@ -1,7 +1,7 @@
 # requirements.txt
 Jinja2
 langchain
-langchain_openai
+langchain_openai>=0.1.0
 langchain_experimental
 openai
 shiny>=0.4
