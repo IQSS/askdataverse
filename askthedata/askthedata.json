@@ -6,7 +6,7 @@
   "types": [
     "query"
   ],
-  "toolUrl": "http://140.247.120.209:8085/",
+  "toolUrl": "https://ai-services.dataverse.org/askthedata/",
   "contentType": "text/tab-separated-values",
   "httpMethod":"GET",
   "toolParameters": {
