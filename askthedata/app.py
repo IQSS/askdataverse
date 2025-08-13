@@ -21,19 +21,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  """
 
-# requirements.txt
-# python=3.10
-# Jinja2
-# langchain
-# langchain_openai
-# openai
-# shiny>=0.4
-# pandas
-### the following ones only for statistical analysis
-# statsmodels
-# seaborn
-# matplotlib
-# tabulate
+# Requirements: see requirements.txt
+
 
 # This code, my first python code, was created in a night. Be merciful.
 
@@ -43,7 +32,7 @@ SOFTWARE.
 # for Harvard Dataverse siteUrl always equals to https://dataverse.harvard.edu
 # fileId is the internal identifier in the Dataverse database
 # example of use:
-# https://askdataverse.shinyapps.io/askthedata/?fileId=4862482&siteUrl=https://dataverse.harvard.edu
+# https://ai-services.dataverse.org/askthedata/?fileId=4862482&siteUrl=https://dataverse.harvard.edu
 # or, if run locally
 # http://localhost:64504/?fileId=4862482&siteUrl=https://dataverse.harvard.edu
 # replace 64504 with your port
@@ -242,23 +231,6 @@ def server(input, output, session):
             if isinstance(res, dict):
                 return str(res.get("output", res.get("final_answer", "")))
             return str(res)
-
-    # async def answer():
-    #     input.think()
-    #     with reactive.isolate():
-    #         ans = "Waiting for you..."
-    #         if(HaveData.get()):
-    #             if HaveQuery.get():
-    #                 this_query = input.query()
-    #             else:
-    #                 this_query = 'What is this data about?' # default initial query
-    #                 HaveQuery.set(True)    # we need this here
-    #             ui.notification_show("Thinking...", id='thinkingID', duration=None)    
-    #             agent_executor = create_pandas_dataframe_agent(myllm, mydf.get(), agent_type="openai-tools", 
-    #                                                            verbose=True, allow_dangerous_code=True)
-    #             ans = agent_executor.invoke(f"{this_query}")
-    #             ui.notification_remove('thinkingID')    
-    #     return f"{ans['output']}"    
-        
+ 
 app = App(app_ui, server)
 
