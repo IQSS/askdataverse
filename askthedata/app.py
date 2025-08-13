@@ -61,6 +61,7 @@ import os
 from htmltools import HTML, div
 import string
 import random
+import csv
 
 from urllib.request import urlopen
 import json
@@ -138,13 +139,42 @@ def server(input, output, session):
         print('Loading data')
         HaveData.set(False)
         ui.notification_show("Loading data...", id='loadingID', duration=None, type='warning')
-        req = requests.get(dataurl).content
-        data = pd.read_csv(io.StringIO(req.decode('utf-8')), sep=None, engine="python")
-        df = pd.DataFrame(data)
-        HaveData.set(True) 
-        ui.notification_remove('loadingID')    
-        mydf.set(df)
-        return df
+        resp = requests.get(dataurl, timeout=60)
+        resp.raise_for_status()
+        raw = resp.content
+        # Try a couple encodings and delimiters
+        for enc in ("utf-8", "latin1"):
+            text = raw.decode(enc, errors="replace")
+            for sep in (None, ",", "\t", ";", "|"):
+                try:
+                    df = pd.read_csv(
+                        io.StringIO(text),
+                        sep=sep,               # None => sniff
+                        engine="python",
+                        on_bad_lines="skip",   # be lenient on odd rows
+                        quoting=csv.QUOTE_MINIMAL
+                    )
+                    if df is not None and df.shape[0] > 0:
+                        mydf.set(df)
+                        HaveData.set(True)
+                        ui.notification_remove('loadingID')
+                        return df
+                except Exception:
+                    pass
+    ui.notification_remove('loadingID')
+    raise ValueError("Could not parse the file as CSV/TSV with common delimiters.")
+
+    # async def load_tabular_data():
+    #     print('Loading data')
+    #     HaveData.set(False)
+    #     ui.notification_show("Loading data...", id='loadingID', duration=None, type='warning')
+    #     req = requests.get(dataurl).content
+    #     data = pd.read_csv(io.StringIO(req.decode('utf-8')), sep=None, engine="python")
+    #     df = pd.DataFrame(data)
+    #     HaveData.set(True) 
+    #     ui.notification_remove('loadingID')    
+    #     mydf.set(df)
+    #     return df
    
     @output
     @render.data_frame
