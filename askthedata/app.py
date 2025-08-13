@@ -184,22 +184,48 @@ def server(input, output, session):
 
     @output
     @render.text
+    @output
     async def answer():
         input.think()
         with reactive.isolate():
-            ans = "Waiting for you..."
-            if(HaveData.get()):
-                if HaveQuery.get():
-                    this_query = input.query()
-                else:
-                    this_query = 'What is this data about?' # default initial query
-                    HaveQuery.set(True)    # we need this here
-                ui.notification_show("Thinking...", id='thinkingID', duration=None)    
-                agent_executor = create_pandas_dataframe_agent(myllm, mydf.get(), agent_type="openai-tools", 
-                                                               verbose=True, allow_dangerous_code=True)
-                ans = agent_executor.invoke(f"{this_query}")
-                ui.notification_remove('thinkingID')    
-        return f"{ans['output']}"    
+            if not HaveData.get():
+                return "Waiting for data..."
+            this_query = input.query() if HaveQuery.get() else "What is this data about?"
+            HaveQuery.set(True)
+            ui.notification_show("Thinking...", id='thinkingID', duration=None)
+            agent_executor = create_pandas_dataframe_agent(
+                myllm, mydf.get(),
+                agent_type="openai-tools",
+                verbose=True,
+                allow_dangerous_code=True
+            )
+            # LangChain versions differ: sometimes returns str, sometimes {"output": ...}
+            try:
+                res = agent_executor.invoke({"input": this_query})
+            except TypeError:
+                # Older/newer API compatibility
+                res = agent_executor.invoke(this_query)
+            ui.notification_remove('thinkingID')
+            if isinstance(res, dict):
+                return str(res.get("output", res.get("final_answer", "")))
+            return str(res)
+
+    # async def answer():
+    #     input.think()
+    #     with reactive.isolate():
+    #         ans = "Waiting for you..."
+    #         if(HaveData.get()):
+    #             if HaveQuery.get():
+    #                 this_query = input.query()
+    #             else:
+    #                 this_query = 'What is this data about?' # default initial query
+    #                 HaveQuery.set(True)    # we need this here
+    #             ui.notification_show("Thinking...", id='thinkingID', duration=None)    
+    #             agent_executor = create_pandas_dataframe_agent(myllm, mydf.get(), agent_type="openai-tools", 
+    #                                                            verbose=True, allow_dangerous_code=True)
+    #             ans = agent_executor.invoke(f"{this_query}")
+    #             ui.notification_remove('thinkingID')    
+    #     return f"{ans['output']}"    
         
 app = App(app_ui, server)
 
