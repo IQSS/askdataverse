@@ -61,7 +61,7 @@ import os
 from htmltools import HTML, div
 import string
 import random
-import csv
+import csv, io
 
 from urllib.request import urlopen
 import json
@@ -100,6 +100,20 @@ dataset_pid = ""
 dataurl = ""
 siteUrl = ""
 
+# we now support more tabular data... in principle
+def _is_xlsx(raw: bytes) -> bool:
+    # XLSX files are ZIPs
+    return raw.startswith(b"PK\x03\x04")
+def _is_xls(raw: bytes) -> bool:
+    # Legacy Excel OLE header
+    return raw.startswith(b"\xD0\xCF\x11\xE0\xA1\xB1\x1A\xE1")
+def _maybe_text(raw: bytes) -> str | None:
+    for enc in ("utf-8", "latin1"):
+        try:
+            return raw.decode(enc)
+        except Exception:
+            continue
+    return None
 
 def app_ui(request):
     global fileid
@@ -136,45 +150,65 @@ def server(input, output, session):
 
     @reactive.Calc
     async def load_tabular_data():
-        print('Loading data')
+        print("Loading data")
         HaveData.set(False)
-        ui.notification_show("Loading data...", id='loadingID', duration=None, type='warning')
+        ui.notification_show("Loading data...", id="loadingID", duration=None, type="warning")
         resp = requests.get(dataurl, timeout=60)
         resp.raise_for_status()
         raw = resp.content
-        # Try a couple encodings and delimiters
-        for enc in ("utf-8", "latin1"):
-            text = raw.decode(enc, errors="replace")
-            for sep in (None, ",", "\t", ";", "|"):
-                try:
-                    df = pd.read_csv(
-                        io.StringIO(text),
-                        sep=sep,               # None => sniff
-                        engine="python",
-                        on_bad_lines="skip",   # be lenient on odd rows
-                        quoting=csv.QUOTE_MINIMAL
-                    )
-                    if df is not None and df.shape[0] > 0:
-                        mydf.set(df)
-                        HaveData.set(True)
-                        ui.notification_remove('loadingID')
-                        return df
-                except Exception:
-                    pass
-    ui.notification_remove('loadingID')
-    raise ValueError("Could not parse the file as CSV/TSV with common delimiters.")
-
-    # async def load_tabular_data():
-    #     print('Loading data')
-    #     HaveData.set(False)
-    #     ui.notification_show("Loading data...", id='loadingID', duration=None, type='warning')
-    #     req = requests.get(dataurl).content
-    #     data = pd.read_csv(io.StringIO(req.decode('utf-8')), sep=None, engine="python")
-    #     df = pd.DataFrame(data)
-    #     HaveData.set(True) 
-    #     ui.notification_remove('loadingID')    
-    #     mydf.set(df)
-    #     return df
+        ctype = (resp.headers.get("Content-Type") or "").lower()
+        def done(df: pd.DataFrame):
+            mydf.set(df)
+            HaveData.set(True)
+            ui.notification_remove("loadingID")
+            return df
+        try:
+            # 1) Byte sniff for Excel regardless of extension/ctype
+            if _is_xlsx(raw):
+                df = pd.read_excel(io.BytesIO(raw))  # needs openpyxl
+                return done(df)
+            if _is_xls(raw): # needs xlrd (<2.0) installed; pandas will pick engine if available
+                df = pd.read_excel(io.BytesIO(raw))
+                return done(df)
+            # 2) If content-type says Excel, still try read_excel
+            if "excel" in ctype or "spreadsheetml" in ctype:
+                df = pd.read_excel(io.BytesIO(raw))
+                return done(df)
+            # 3) Try text-based formats (JSON or CSV/TSV)
+            text = _maybe_text(raw)
+            if text is not None:
+                stripped = text.lstrip()
+                # JSON?
+                if stripped.startswith("{") or stripped.startswith("[") or "json" in ctype:
+                    df = pd.read_json(io.StringIO(text))
+                    # If it’s a list of records, this yields a DataFrame; if it’s a dict, normalize:
+                    if isinstance(df, pd.Series) or df.empty:
+                        try:
+                            j = json.loads(text)
+                            df = pd.json_normalize(j) if not isinstance(j, list) else pd.DataFrame(j)
+                        except Exception:
+                            pass
+                    return done(df)
+                # CSV/TSV with multiple guesses
+                for sep in (None, ",", "\t", ";", "|"):
+                    try:
+                        df = pd.read_csv(
+                            io.StringIO(text),
+                            sep=sep,             # None => sniff
+                            engine="python",
+                            on_bad_lines="skip",
+                            quoting=csv.QUOTE_MINIMAL,
+                        )
+                        if not df.empty:
+                            return done(df)
+                    except Exception:
+                        continue
+            # 4) If we got here, we couldn’t parse
+            ui.notification_remove("loadingID")
+            raise ValueError("Unsupported or malformed file; could not parse as Excel/JSON/CSV.")
+        except Exception as e:
+            ui.notification_remove("loadingID")
+            raise RuntimeError(f"Failed to load file: {e}")
    
     @output
     @render.data_frame
@@ -184,7 +218,6 @@ def server(input, output, session):
 
     @output
     @render.text
-    @output
     async def answer():
         input.think()
         with reactive.isolate():

@@ -14,6 +14,10 @@ tabulate
 scikit-learn 
 geopy
 folium
-csv
+# Excel file support
+openpyxl         # for .xlsx
+xlrd==1.2.0      # for .xls (old Excel format)
+pyxlsb           # optional: for binary Excel (.xlsb)
+
 
 
